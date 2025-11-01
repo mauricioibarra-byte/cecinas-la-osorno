@@ -1,14 +1,19 @@
+import AnimatedLogo from "@/components/AnimatedLogo";
+
 export default function HeroSection() {
   return (
     <section id="inicio" className="relative min-h-[90vh] flex items-center bg-white overflow-hidden">
       {/* Contenido centrado */}
       <div className="mx-auto px-6 lg:px-8 max-w-7xl w-full py-20">
         <div className="text-center max-w-4xl mx-auto">
-          {/* Titulo principal - Estilo Apple */}
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black mb-6 leading-tight tracking-tight">
-            Tradición Artesanal.
-            <br />
-            <span className="text-primary">Sabor Auténtico.</span>
+          {/* Logo Animado - PROTAGONISTA */}
+          <div className="mb-16 flex justify-center">
+            <AnimatedLogo className="w-80 md:w-[500px] lg:w-[600px]" />
+          </div>
+
+          {/* Titulo principal - Más compacto */}
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight tracking-tight">
+            Tradición Artesanal desde 1957
           </h1>
 
           {/* Subtítulo */}

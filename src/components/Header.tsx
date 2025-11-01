@@ -18,11 +18,13 @@ export default function Header() {
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-xl border-b border-black/10">
       <div className="mx-auto px-6 lg:px-8 max-w-7xl">
         <div className="flex h-14 items-center justify-between">
-          {/* Logo - Minimalista estilo Apple */}
+          {/* Logo */}
           <Link href="#inicio" className="flex items-center gap-2">
-            <span className="text-xl font-semibold text-black tracking-tight">
-              Cecinas La Osorno
-            </span>
+            <img
+              src="/images/logo.png"
+              alt="Cecinas La Osorno"
+              className="h-12 w-auto"
+            />
           </Link>
 
           {/* Desktop Navigation - Centrado */}
