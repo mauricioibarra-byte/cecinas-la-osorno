@@ -1,0 +1,22 @@
+[images]
+  remote_images = [
+    "https://source.unsplash.com/.*",
+    "https://images.unsplash.com/.*",
+    "https://ext.same-assets.com/.*",
+    "https://ugc.same-assets.com/.*",
+    "https://images.pexels.com/.*",
+    "https://thumbs.dreamstime.com/.*",
+    "https://cosascaseras.com/.*",
+    "https://images.squarespace-cdn.com/.*",
+    "https://media.gettyimages.com/.*",
+    "https://c8.alamy.com/.*",
+    "https://l450v.alamy.com/.*",
+    "https://media.istockphoto.com/.*"
+  ]
+
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"

@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Paleta Rústico-Artesanal Premium */
+    --background: 38 33% 96%; /* Crema/Beige claro #F5F5DC */
+    --foreground: 0 0% 17%; /* Casi negro cálido #2C2C2C */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 17%;
+    --primary: 357 84% 51%; /* Rojo Vibrante #EC1724 */
+    --primary-foreground: 0 0% 98%;
+    --secondary: 19 54% 41%; /* Sienna #A0522D */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 38 33% 96%;
+    --muted-foreground: 0 0% 45%;
+    --accent: 0 50% 58%; /* Granate suave #CD5C5C */
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 25 20% 85%;
+    --input: 25 20% 85%;
+    --ring: 19 62% 33%;
+    --radius: 0.5rem;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    --background: 19 35% 13%; /* Marrón chocolate oscuro #3E2723 */
+    --foreground: 38 33% 96%;
+    --card: 19 35% 13%;
+    --card-foreground: 38 33% 96%;
+    --popover: 19 35% 13%;
+    --popover-foreground: 38 33% 96%;
+    --primary: 38 33% 96%;
+    --primary-foreground: 357 84% 51%;
+    --secondary: 19 20% 25%;
+    --secondary-foreground: 38 33% 96%;
+    --muted: 19 20% 25%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 50% 58%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 19 20% 25%;
+    --input: 19 20% 25%;
+    --ring: 38 33% 96%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
