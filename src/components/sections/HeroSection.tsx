@@ -19,30 +19,18 @@ export default function HeroSection() {
 
       {/* Content */}
       <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
-        {/* Logo */}
-        <div className="mb-8 animate-fade-in">
-          <Image
-            src="/assets/logo.png"
-            alt="Cecinas La Osorno Logo"
-            width={300}
-            height={300}
-            className="drop-shadow-2xl"
-            priority
-          />
-        </div>
-
         {/* Title */}
-        <h1 className="mb-4 animate-fade-in-up text-5xl font-bold drop-shadow-lg md:text-7xl">
+        <h1 className="mb-4 text-5xl font-bold drop-shadow-lg md:text-7xl">
           Cecinas La Osorno
         </h1>
 
         {/* Subtitle */}
-        <p className="mb-8 max-w-2xl animate-fade-in-up text-xl drop-shadow-lg md:text-2xl animation-delay-200">
+        <p className="mb-8 max-w-2xl text-xl drop-shadow-lg md:text-2xl">
           Tradición y calidad en cada producto
         </p>
 
         {/* CTA Button */}
-        <button className="animate-fade-in-up animation-delay-400 rounded-full bg-red-600 px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-red-700 hover:scale-105 shadow-xl">
+        <button className="rounded-full bg-red-600 px-8 py-4 text-lg font-semibold text-white transition-all hover:bg-red-700 hover:scale-105 shadow-xl">
           Conoce Nuestros Productos
         </button>
       </div>
