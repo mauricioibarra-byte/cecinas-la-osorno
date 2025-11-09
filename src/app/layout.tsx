@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Playfair_Display, Open_Sans } from "next/font/google";
 import "./globals.css";
 import ClientBody from "./ClientBody";
-import Script from "next/script";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -29,12 +28,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className={`${openSans.variable} ${playfair.variable}`}>
-      <head>
-        <Script
-          crossOrigin="anonymous"
-          src="//unpkg.com/same-runtime/dist/index.global.js"
-        />
-      </head>
       <body suppressHydrationWarning className="antialiased">
         <ClientBody>{children}</ClientBody>
       </body>
