@@ -1,9 +1,38 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function HeroSection() {
+  const [showVideo, setShowVideo] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowVideo(false);
+    }, 6000); // 6 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section className="relative h-screen w-full overflow-hidden">
-      {/* Background Image */}
+      {/* Video that plays for 6 seconds then disappears */}
+      {showVideo && (
+        <div className="absolute inset-0 z-20">
+          <video
+            autoPlay
+            muted
+            playsInline
+            className="h-full w-full object-cover"
+          >
+            <source src="/images/hero-video.mp4" type="video/mp4" />
+          </video>
+          {/* Dark overlay for better text readability */}
+          <div className="absolute inset-0 bg-black/40" />
+        </div>
+      )}
+
+      {/* Background Image (shows after video disappears) */}
       <div className="absolute inset-0">
         <Image
           src="/assets/hero-cecinas-banner.jpg"
