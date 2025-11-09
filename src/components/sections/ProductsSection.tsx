@@ -26,7 +26,7 @@ const products: Product[] = [
     id: 3,
     name: "Arrollado de Huaso",
     description: "Cocido artesanal, ideal para laminar",
-    image: "https://ugc.same-assets.com/w3Yss5XQINqUEFHD1pKJpaqlGu59MWze.jpeg",
+    image: "/images/arrollado-huaso.jpg",
   },
   {
     id: 4,

@@ -35,12 +35,12 @@ export default function HeroSection() {
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-gray-900">
           {/* Title */}
           <h1 className="mb-4 text-5xl font-bold md:text-7xl">
-            Cecinas La Osorno
+            Tradición Artesanal desde 1957
           </h1>
 
           {/* Subtitle */}
           <p className="mb-8 max-w-2xl text-xl md:text-2xl">
-            Tradición y calidad en cada producto
+            Cecinas premium elaboradas con recetas de familia desde hace generaciones.
           </p>
 
           {/* CTA Button */}
