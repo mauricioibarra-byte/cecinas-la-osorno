@@ -166,14 +166,14 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-bold mb-1">Teléfono</h4>
                   <a
-                    href="tel:+56912345678"
+                    href="tel:+56225271151"
                     className="text-foreground/70 hover:text-primary transition-colors"
                   >
-                    +56 9 1234 5678
+                    (+562) 2527 1151
                   </a>
                   <div className="mt-2">
                     <Button size="sm" variant="default" className="bg-[#25D366] hover:bg-[#20BA5A]" asChild>
-                      <a href="https://wa.me/56912345678" target="_blank" rel="noopener noreferrer">
+                      <a href="https://wa.me/56225271151" target="_blank" rel="noopener noreferrer">
                         WhatsApp
                       </a>
                     </Button>
@@ -189,8 +189,9 @@ export default function ContactSection() {
                 <div>
                   <h4 className="font-bold mb-1">Dirección</h4>
                   <p className="text-foreground/70">
-                    Osorno<br />
-                    Región de Los Lagos, Chile
+                    Av. El Parrón 0968<br />
+                    La Cisterna, 7980777<br />
+                    Santiago, Región Metropolitana
                   </p>
                 </div>
               </div>
