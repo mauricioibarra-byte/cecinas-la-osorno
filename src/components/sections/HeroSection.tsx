@@ -22,7 +22,7 @@ export default function HeroSection() {
             autoPlay
             muted
             playsInline
-            className="min-h-full min-w-full object-cover"
+            className="max-h-full max-w-full object-contain"
           >
             <source src="/images/hero-video.mp4" type="video/mp4" />
           </video>
