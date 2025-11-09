@@ -14,7 +14,7 @@ export default function HeroSection() {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-black">
+    <section className="relative h-screen w-full overflow-hidden bg-white">
       {/* Video that plays for 6 seconds then disappears */}
       {showVideo && (
         <div className="absolute inset-0 z-20 flex items-center justify-center">
@@ -32,14 +32,14 @@ export default function HeroSection() {
 
       {/* Content - Only shows after video disappears */}
       {!showVideo && (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-gray-900">
           {/* Title */}
-          <h1 className="mb-4 text-5xl font-bold drop-shadow-lg md:text-7xl">
+          <h1 className="mb-4 text-5xl font-bold md:text-7xl">
             Cecinas La Osorno
           </h1>
 
           {/* Subtitle */}
-          <p className="mb-8 max-w-2xl text-xl drop-shadow-lg md:text-2xl">
+          <p className="mb-8 max-w-2xl text-xl md:text-2xl">
             Tradición y calidad en cada producto
           </p>
 
@@ -50,7 +50,7 @@ export default function HeroSection() {
 
           {/* Scroll Indicator */}
           <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-            <div className="flex flex-col items-center text-white">
+            <div className="flex flex-col items-center text-gray-900">
               <span className="mb-2 text-sm">Desliza para explorar</span>
               <svg
                 className="h-6 w-6"
