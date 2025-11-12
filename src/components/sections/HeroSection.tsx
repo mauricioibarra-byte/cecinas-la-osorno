@@ -12,7 +12,7 @@ export default function HeroSection() {
       // Wait for animation to complete before hiding video
       setTimeout(() => {
         setShowVideo(false);
-      }, 1500); // Animation duration
+      }, 2500); // Extended animation duration
     }, 6000); // 6 seconds
 
     return () => clearTimeout(timer);
@@ -23,9 +23,9 @@ export default function HeroSection() {
       {/* Video that plays for 6 seconds then flies to logo position */}
       {showVideo && (
         <div
-          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[1500ms] ease-in-out ${
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[2500ms] ease-in-out ${
             isAnimating
-              ? "!top-4 !left-4 !w-32 !h-32 scale-[0.15] opacity-0"
+              ? "!top-4 !left-4 !w-20 !h-20 scale-[0.1] opacity-0"
               : ""
           }`}
         >
@@ -39,19 +39,6 @@ export default function HeroSection() {
           </video>
         </div>
       )}
-
-      {/* Logo that appears after video animation */}
-      <div
-        className={`fixed top-4 left-4 z-30 transition-all duration-1000 ${
-          !showVideo ? "opacity-100 scale-100" : "opacity-0 scale-0"
-        }`}
-      >
-        <img
-          src="/images/logo.png"
-          alt="Cecinas La Osorno Logo"
-          className="h-16 w-auto md:h-20"
-        />
-      </div>
 
       {/* Content - Only shows after video disappears */}
       {!showVideo && (
