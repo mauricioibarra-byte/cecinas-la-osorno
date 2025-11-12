@@ -3,31 +3,38 @@
 import { useState, useEffect } from "react";
 
 export default function HeroSection() {
-  const [showVideo, setShowVideo] = useState(true);
-  const [isAnimating, setIsAnimating] = useState(false);
+  const [animationState, setAnimationState] = useState<'playing' | 'flying' | 'done'>('playing');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsAnimating(true);
-      // Wait for animation to complete before hiding video
-      setTimeout(() => {
-        setShowVideo(false);
-      }, 4000); // 4 seconds for animation
-    }, 6000); // 6 seconds
+    // After 6 seconds, start the fly animation
+    const flyTimer = setTimeout(() => {
+      setAnimationState('flying');
+    }, 6000);
 
-    return () => clearTimeout(timer);
+    // After animation completes (6s + 4s), hide video and show content
+    const doneTimer = setTimeout(() => {
+      setAnimationState('done');
+    }, 10000);
+
+    return () => {
+      clearTimeout(flyTimer);
+      clearTimeout(doneTimer);
+    };
   }, []);
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Video that plays for 6 seconds then flies to logo position */}
-      {showVideo && (
+      {/* Video Container */}
+      {animationState !== 'done' && (
         <div
-          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[4000ms] ease-in-out ${
-            isAnimating
-              ? "!top-4 !left-4 !w-20 !h-20 scale-[0.1] opacity-0"
-              : ""
-          }`}
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-black
+            ${animationState === 'flying' 
+              ? 'animate-fly-to-corner' 
+              : ''
+            }`}
+          style={{
+            animation: animationState === 'flying' ? 'flyToCorner 4s ease-in-out forwards' : 'none'
+          }}
         >
           <video
             autoPlay
@@ -40,8 +47,8 @@ export default function HeroSection() {
         </div>
       )}
 
-      {/* Content - Only shows after video disappears */}
-      {!showVideo && (
+      {/* Content - Shows after video animation completes */}
+      {animationState === 'done' && (
         <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white animate-fade-in">
           {/* Title */}
           <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold">
@@ -77,6 +84,20 @@ export default function HeroSection() {
           </div>
         </div>
       )}
+
+      {/* Custom CSS for fly animation */}
+      <style jsx>{`
+        @keyframes flyToCorner {
+          0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+          }
+          100% {
+            transform: translate(calc(-50vw + 80px), calc(-50vh + 80px)) scale(0.1);
+            opacity: 0;
+          }
+        }
+      `}</style>
     </section>
   );
 }
