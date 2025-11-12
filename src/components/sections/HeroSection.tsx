@@ -4,10 +4,15 @@ import { useState, useEffect } from "react";
 
 export default function HeroSection() {
   const [showVideo, setShowVideo] = useState(true);
+  const [isAnimating, setIsAnimating] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowVideo(false);
+      setIsAnimating(true);
+      // Wait for animation to complete before hiding video
+      setTimeout(() => {
+        setShowVideo(false);
+      }, 1500); // Animation duration
     }, 6000); // 6 seconds
 
     return () => clearTimeout(timer);
@@ -15,9 +20,15 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-screen w-full overflow-hidden bg-black">
-      {/* Video that plays for 6 seconds then disappears */}
+      {/* Video that plays for 6 seconds then flies to logo position */}
       {showVideo && (
-        <div className="absolute inset-0 z-20 flex items-center justify-center bg-black">
+        <div
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[1500ms] ease-in-out ${
+            isAnimating
+              ? "!top-4 !left-4 !w-32 !h-32 scale-[0.15] opacity-0"
+              : ""
+          }`}
+        >
           <video
             autoPlay
             muted
@@ -29,9 +40,22 @@ export default function HeroSection() {
         </div>
       )}
 
+      {/* Logo that appears after video animation */}
+      <div
+        className={`fixed top-4 left-4 z-30 transition-all duration-1000 ${
+          !showVideo ? "opacity-100 scale-100" : "opacity-0 scale-0"
+        }`}
+      >
+        <img
+          src="/images/logo.png"
+          alt="Cecinas La Osorno Logo"
+          className="h-16 w-auto md:h-20"
+        />
+      </div>
+
       {/* Content - Only shows after video disappears */}
       {!showVideo && (
-        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white">
+        <div className="relative z-10 flex h-full flex-col items-center justify-center px-4 text-center text-white animate-fade-in">
           {/* Title */}
           <h1 className="mb-4 text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold">
             Tradición Artesanal desde 1957
