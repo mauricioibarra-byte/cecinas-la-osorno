@@ -12,7 +12,7 @@ export default function HeroSection() {
       // Wait for animation to complete before hiding video
       setTimeout(() => {
         setShowVideo(false);
-      }, 2500); // Extended animation duration
+      }, 4000); // 4 seconds for animation
     }, 6000); // 6 seconds
 
     return () => clearTimeout(timer);
@@ -23,7 +23,7 @@ export default function HeroSection() {
       {/* Video that plays for 6 seconds then flies to logo position */}
       {showVideo && (
         <div
-          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[2500ms] ease-in-out ${
+          className={`absolute inset-0 z-20 flex items-center justify-center bg-black transition-all duration-[4000ms] ease-in-out ${
             isAnimating
               ? "!top-4 !left-4 !w-20 !h-20 scale-[0.1] opacity-0"
               : ""
