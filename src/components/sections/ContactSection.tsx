@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Mail, Phone, MapPin, Clock, Video } from "lucide-react";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -45,6 +45,38 @@ export default function ContactSection() {
             ¿Tienes preguntas, consultas especiales o quieres saber más? Escríbenos
           </p>
           <div className="w-24 h-1 bg-accent mx-auto mt-6" />
+        </div>
+
+        {/* Calendly Banner - Destacado */}
+        <div className="max-w-6xl mx-auto mb-12">
+          <div className="bg-gradient-to-r from-primary via-secondary to-accent p-8 rounded-xl shadow-2xl text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="flex items-center gap-4">
+                <div className="p-4 bg-white/20 rounded-full backdrop-blur-sm">
+                  <Video className="h-8 w-8" />
+                </div>
+                <div>
+                  <h3 className="text-2xl font-bold mb-2">¿Prefieres una Videollamada?</h3>
+                  <p className="text-white/90">
+                    Agenda una consulta virtual personalizada con nosotros
+                  </p>
+                </div>
+              </div>
+              <Button 
+                size="lg" 
+                className="bg-white text-primary hover:bg-white/90 font-bold px-8 py-6 text-lg shadow-xl"
+                asChild
+              >
+                <a 
+                  href="https://calendly.com/video-socafac/30min" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  Agendar Videollamada
+                </a>
+              </Button>
+            </div>
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
@@ -142,6 +174,33 @@ export default function ContactSection() {
             </h3>
 
             <div className="space-y-6">
+              {/* Videollamada Card - Destacada */}
+              <div className="flex items-start gap-4 p-6 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg shadow-lg border-2 border-primary/20">
+                <div className="p-3 bg-primary rounded-lg">
+                  <Video className="h-6 w-6 text-white" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-bold mb-2 text-lg">Videollamada</h4>
+                  <p className="text-foreground/70 mb-3 text-sm">
+                    Agenda una consulta virtual personalizada
+                  </p>
+                  <Button 
+                    size="sm" 
+                    variant="default"
+                    className="bg-primary hover:bg-primary/90"
+                    asChild
+                  >
+                    <a 
+                      href="https://calendly.com/video-socafac/30min" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                    >
+                      Agendar Ahora
+                    </a>
+                  </Button>
+                </div>
+              </div>
+
               {/* Email */}
               <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border border-border">
                 <div className="p-3 bg-primary/10 rounded-lg">
