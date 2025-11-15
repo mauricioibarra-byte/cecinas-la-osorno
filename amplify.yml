@@ -9,13 +9,13 @@ frontend:
       commands:
         - echo "Building Next.js static export..."
         - pnpm run build
-        - echo "Creating required-server-files.json for Amplify compatibility..."
-        - mkdir -p .next
-        - echo '{"version":1,"config":{"distDir":"out","output":"export"},"appDir":"","files":[],"ignore":[]}' > .next/required-server-files.json
+        - echo "Copying required-server-files.json to output directory for Amplify compatibility..."
+        - cp .next/required-server-files.json out/required-server-files.json
         - echo "Build completed!"
         - echo "Verifying output..."
         - ls -la out/
         - test -f out/index.html && echo "✓ Static export successful" || (echo "✗ Export failed" && exit 1)
+        - test -f out/required-server-files.json && echo "✓ required-server-files.json copied" || echo "✗ required-server-files.json missing"
   artifacts:
     baseDirectory: out
     files:
