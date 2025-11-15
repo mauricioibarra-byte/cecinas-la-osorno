@@ -9,6 +9,9 @@ frontend:
       commands:
         - echo "Building Next.js static export..."
         - pnpm run build
+        - echo "Creating required-server-files.json for Amplify compatibility..."
+        - mkdir -p .next
+        - echo '{"version":1,"config":{"distDir":"out","output":"export"},"appDir":"","files":[],"ignore":[]}' > .next/required-server-files.json
         - echo "Build completed!"
         - echo "Verifying output..."
         - ls -la out/
