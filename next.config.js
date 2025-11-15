@@ -6,10 +6,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  // Explicitly disable server-side features
-  experimental: {
-    // Ensure no server components are used
-  },
-}
+  // Disable server-side features completely
+  experimental: {},
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
