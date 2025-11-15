@@ -18,15 +18,15 @@ export default function ContactSection() {
 
   const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // @ts-ignore - Calendly se carga dinámicamente
+    // @ts-expect-error - Calendly se carga dinámicamente
     if (window.Calendly) {
-      // @ts-ignore
+      // @ts-expect-error - Calendly se carga dinámicamente
       window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/mauricioibarra-byte/30min'
+        url: 'https://calendly.com/video-socafac/30min'
       });
     } else {
       // Fallback: abrir en nueva ventana si el script no se cargó
-      window.open('https://calendly.com/mauricioibarra-byte/30min', '_blank');
+      window.open('https://calendly.com/video-socafac/30min', '_blank');
     }
   };
 
@@ -63,7 +63,7 @@ export default function ContactSection() {
                 
                 <div className="flex-shrink-0">
                   <a
-                    href="https://calendly.com/mauricioibarra-byte/30min"
+                    href="https://calendly.com/video-socafac/30min"
                     onClick={handleCalendlyClick}
                     className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform cursor-pointer"
                   >
