@@ -29,6 +29,8 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+# Explicitly tell Amplify this is a static site (no server-side rendering)
+platform: WEB
 customHeaders:
   - pattern: '**/*'
     headers:
