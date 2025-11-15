@@ -1,8 +1,35 @@
 'use client';
 
 import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
+import { useEffect } from 'react';
 
 export default function ContactSection() {
+  useEffect(() => {
+    // Cargar el script de Calendly
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
+  const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    // @ts-ignore - Calendly se carga dinámicamente
+    if (window.Calendly) {
+      // @ts-ignore
+      window.Calendly.initPopupWidget({
+        url: 'https://calendly.com/mauricioibarra-byte/30min'
+      });
+    } else {
+      // Fallback: abrir en nueva ventana si el script no se cargó
+      window.open('https://calendly.com/mauricioibarra-byte/30min', '_blank');
+    }
+  };
+
   return (
     <section id="contacto" className="py-20 bg-white">
       <div className="container mx-auto px-4">
@@ -37,9 +64,8 @@ export default function ContactSection() {
                 <div className="flex-shrink-0">
                   <a
                     href="https://calendly.com/mauricioibarra-byte/30min"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform"
+                    onClick={handleCalendlyClick}
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform cursor-pointer"
                   >
                     <Calendar className="w-6 h-6" />
                     Agendar Ahora
