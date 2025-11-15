@@ -3,28 +3,51 @@
 import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
 import { useEffect } from 'react';
 
+interface CalendlyWindow extends Window {
+  Calendly?: {
+    initPopupWidget: (options: { url: string }) => void;
+  };
+}
+
 export default function ContactSection() {
   useEffect(() => {
     // Cargar el script de Calendly
     const script = document.createElement('script');
     script.src = 'https://assets.calendly.com/assets/external/widget.js';
     script.async = true;
+    script.onload = () => {
+      console.log('Calendly script loaded successfully');
+    };
+    script.onerror = () => {
+      console.error('Failed to load Calendly script');
+    };
     document.body.appendChild(script);
 
     return () => {
-      document.body.removeChild(script);
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
     };
   }, []);
 
   const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
-    // @ts-expect-error - Calendly se carga dinámicamente
-    if (window.Calendly) {
-      // @ts-expect-error - Calendly se carga dinámicamente
-      window.Calendly.initPopupWidget({
-        url: 'https://calendly.com/video-socafac/30min'
-      });
+    
+    // Verificar si Calendly está disponible
+    const calendlyWindow = window as CalendlyWindow;
+    if (typeof window !== 'undefined' && calendlyWindow.Calendly) {
+      try {
+        calendlyWindow.Calendly.initPopupWidget({
+          url: 'https://calendly.com/video-socafac/30min'
+        });
+        console.log('Calendly popup opened');
+      } catch (error) {
+        console.error('Error opening Calendly popup:', error);
+        // Fallback: abrir en nueva ventana
+        window.open('https://calendly.com/video-socafac/30min', '_blank');
+      }
     } else {
+      console.warn('Calendly not loaded, opening in new window');
       // Fallback: abrir en nueva ventana si el script no se cargó
       window.open('https://calendly.com/video-socafac/30min', '_blank');
     }

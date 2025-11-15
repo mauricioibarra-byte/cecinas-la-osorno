@@ -36,15 +36,21 @@ export default function AdminPage() {
 
   const loadProducts = async () => {
     try {
+      console.log('Loading products...')
       const { data, error } = await supabase
         .from('app_fd25b764ee_products')
         .select('*')
         .order('name')
 
-      if (error) throw error
+      if (error) {
+        console.error('Error loading products:', error)
+        throw error
+      }
+      console.log('Products loaded:', data?.length || 0)
       setProducts(data || [])
     } catch (error) {
       console.error('Error loading products:', error)
+      alert('Error al cargar productos')
     } finally {
       setLoading(false)
     }
@@ -63,31 +69,45 @@ export default function AdminPage() {
         stock: parseInt(formData.stock)
       }
 
+      console.log('Saving product:', productData)
+
       if (editingProduct) {
+        console.log('Updating product:', editingProduct.id)
         const { error } = await supabase
           .from('app_fd25b764ee_products')
           .update(productData)
           .eq('id', editingProduct.id)
 
-        if (error) throw error
+        if (error) {
+          console.error('Error updating product:', error)
+          throw error
+        }
+        console.log('Product updated successfully')
       } else {
+        console.log('Inserting new product')
         const { error } = await supabase
           .from('app_fd25b764ee_products')
           .insert(productData)
 
-        if (error) throw error
+        if (error) {
+          console.error('Error inserting product:', error)
+          throw error
+        }
+        console.log('Product inserted successfully')
       }
 
       setIsDialogOpen(false)
       resetForm()
-      loadProducts()
+      await loadProducts()
+      alert('Producto guardado exitosamente')
     } catch (error) {
       console.error('Error saving product:', error)
-      alert('Error al guardar el producto')
+      alert('Error al guardar el producto. Por favor, verifica los datos e intenta de nuevo.')
     }
   }
 
   const handleEdit = (product: Product) => {
+    console.log('Editing product:', product.id)
     setEditingProduct(product)
     setFormData({
       name: product.name,
@@ -104,13 +124,19 @@ export default function AdminPage() {
     if (!confirm('¿Estás seguro de eliminar este producto?')) return
 
     try {
+      console.log('Deleting product:', id)
       const { error } = await supabase
         .from('app_fd25b764ee_products')
         .delete()
         .eq('id', id)
 
-      if (error) throw error
-      loadProducts()
+      if (error) {
+        console.error('Error deleting product:', error)
+        throw error
+      }
+      console.log('Product deleted successfully')
+      await loadProducts()
+      alert('Producto eliminado exitosamente')
     } catch (error) {
       console.error('Error deleting product:', error)
       alert('Error al eliminar el producto')
@@ -140,7 +166,10 @@ export default function AdminPage() {
       <main className="container mx-auto px-4 py-8">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-3xl font-bold">Gestión de Productos</h2>
-          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+          <Dialog open={isDialogOpen} onOpenChange={(open) => {
+            setIsDialogOpen(open)
+            if (!open) resetForm()
+          }}>
             <DialogTrigger asChild>
               <Button onClick={resetForm}>
                 <Plus className="h-4 w-4 mr-2" />

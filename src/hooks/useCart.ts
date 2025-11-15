@@ -20,25 +20,37 @@ export function useCart() {
           localStorage.setItem('cart_session_id', sessionId)
         }
 
+        console.log('Initializing cart with session_id:', sessionId)
+
         // Buscar carrito existente
-        const { data: existingCart } = await supabase
+        const { data: existingCart, error: fetchError } = await supabase
           .from('app_fd25b764ee_carts')
           .select('*')
           .eq('session_id', sessionId)
-          .single()
+          .maybeSingle()
+
+        if (fetchError) {
+          console.error('Error fetching cart:', fetchError)
+        }
 
         if (existingCart) {
+          console.log('Found existing cart:', existingCart.id)
           setCart(existingCart)
           await loadCartItems(existingCart.id)
         } else {
           // Crear nuevo carrito
+          console.log('Creating new cart...')
           const { data: newCart, error } = await supabase
             .from('app_fd25b764ee_carts')
             .insert({ session_id: sessionId })
             .select()
             .single()
 
-          if (error) throw error
+          if (error) {
+            console.error('Error creating cart:', error)
+            throw error
+          }
+          console.log('New cart created:', newCart.id)
           setCart(newCart)
         }
       } catch (error) {
@@ -54,6 +66,7 @@ export function useCart() {
   // Cargar items del carrito
   const loadCartItems = async (cartId: string) => {
     try {
+      console.log('Loading cart items for cart:', cartId)
       const { data, error } = await supabase
         .from('app_fd25b764ee_cart_items')
         .select(`
@@ -62,7 +75,11 @@ export function useCart() {
         `)
         .eq('cart_id', cartId)
 
-      if (error) throw error
+      if (error) {
+        console.error('Error loading cart items:', error)
+        throw error
+      }
+      console.log('Loaded cart items:', data?.length || 0)
       setCartItems(data || [])
     } catch (error) {
       console.error('Error loading cart items:', error)
@@ -71,21 +88,32 @@ export function useCart() {
 
   // Agregar producto al carrito
   const addToCart = async (product: Product, quantity: number = 1) => {
-    if (!cart) return
+    if (!cart) {
+      console.error('No cart available')
+      return
+    }
 
     try {
+      console.log('Adding product to cart:', product.id, 'quantity:', quantity)
+      
       // Verificar si el producto ya está en el carrito
       const existingItem = cartItems.find(item => item.product_id === product.id)
 
       if (existingItem) {
+        console.log('Updating existing item:', existingItem.id)
         // Actualizar cantidad
         const { error } = await supabase
           .from('app_fd25b764ee_cart_items')
           .update({ quantity: existingItem.quantity + quantity })
           .eq('id', existingItem.id)
 
-        if (error) throw error
+        if (error) {
+          console.error('Error updating cart item:', error)
+          throw error
+        }
+        console.log('Item updated successfully')
       } else {
+        console.log('Inserting new item')
         // Agregar nuevo item
         const { error } = await supabase
           .from('app_fd25b764ee_cart_items')
@@ -95,12 +123,17 @@ export function useCart() {
             quantity
           })
 
-        if (error) throw error
+        if (error) {
+          console.error('Error inserting cart item:', error)
+          throw error
+        }
+        console.log('Item inserted successfully')
       }
 
       await loadCartItems(cart.id)
     } catch (error) {
       console.error('Error adding to cart:', error)
+      alert('Error al agregar producto al carrito. Por favor, intenta de nuevo.')
     }
   }
 
@@ -114,12 +147,16 @@ export function useCart() {
         return
       }
 
+      console.log('Updating quantity for item:', itemId, 'to:', quantity)
       const { error } = await supabase
         .from('app_fd25b764ee_cart_items')
         .update({ quantity })
         .eq('id', itemId)
 
-      if (error) throw error
+      if (error) {
+        console.error('Error updating quantity:', error)
+        throw error
+      }
       await loadCartItems(cart.id)
     } catch (error) {
       console.error('Error updating quantity:', error)
@@ -131,12 +168,16 @@ export function useCart() {
     if (!cart) return
 
     try {
+      console.log('Removing item from cart:', itemId)
       const { error } = await supabase
         .from('app_fd25b764ee_cart_items')
         .delete()
         .eq('id', itemId)
 
-      if (error) throw error
+      if (error) {
+        console.error('Error removing item:', error)
+        throw error
+      }
       await loadCartItems(cart.id)
     } catch (error) {
       console.error('Error removing from cart:', error)
@@ -148,12 +189,16 @@ export function useCart() {
     if (!cart) return
 
     try {
+      console.log('Clearing cart:', cart.id)
       const { error } = await supabase
         .from('app_fd25b764ee_cart_items')
         .delete()
         .eq('cart_id', cart.id)
 
-      if (error) throw error
+      if (error) {
+        console.error('Error clearing cart:', error)
+        throw error
+      }
       setCartItems([])
     } catch (error) {
       console.error('Error clearing cart:', error)
