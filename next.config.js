@@ -1,13 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  distDir: 'out',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
-  // Ensure all routes are generated at build time
-  generateBuildId: async () => {
-    return 'build-' + Date.now()
+  // Explicitly disable server-side features
+  experimental: {
+    // Ensure no server components are used
   },
 }
 
