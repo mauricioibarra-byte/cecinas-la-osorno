@@ -67,9 +67,10 @@ export default function VisitSection() {
               <div>
                 <h3 className="font-bold text-lg mb-2">Horarios</h3>
                 <div className="text-foreground/70 space-y-1">
-                  <p>Lunes a Viernes: <strong>9:00 - 19:00</strong></p>
-                  <p>Sábados: <strong>9:00 - 14:00</strong></p>
-                  <p>Domingos: <strong>Cerrado</strong></p>
+                  <p>Lunes a Jueves: <strong>9:00 - 14:00  /  15:00 - 18:00</strong></p>
+                  <p>Viernes: <strong>9:00 - 18:00</strong></p>
+                  <p>Sábados: <strong>9:00 - 17:00</strong></p>
+                  <p>Domingos: <strong>9:00 - 14:00</strong></p>
                 </div>
               </div>
             </div>

@@ -39,12 +39,11 @@ export default function HistorySection() {
               El Legado que Nos Define
             </h3>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
-              Nos presentamos como <strong>SOCAFAC</strong>, pero nuestra identidad es inconfundible:
-              <strong className="text-primary"> SOMOS CECINAS LA OSORNO</strong>.
+              Cecinas la Osorno, con su identidad inconfundible, hoy es una empresa Socafac.
             </p>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
               Hemos tomado la posta de esta prestigiosa fábrica con un profundo respeto por su legado.
-              Nuestra adquisición fue un traspaso de esencia, donde la promesa es la continuidad total.
+              Nuestra misión es continuar con la esencia, donde la promesa es mantener la calidad en nuestros procesos y el sabor en nuestros productos, para que así ud. deje que su paladar decida…
             </p>
             <ul className="space-y-3 mt-6">
               <li className="flex items-start gap-3">

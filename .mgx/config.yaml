@@ -1,4 +1,4 @@
 build: pnpm run build
-build_path: .next
+build_path: null
 dev: pnpm run dev
-install: pnpm install
+install: pnpm i
