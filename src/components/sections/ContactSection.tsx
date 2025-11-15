@@ -1,281 +1,88 @@
-"use client";
+'use client';
 
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
-import { Mail, Phone, MapPin, Clock, Video } from "lucide-react";
+import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
 
 export default function ContactSection() {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    reason: "",
-    message: "",
-  });
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Here you would typically send the form data to a backend
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
-    setTimeout(() => setSubmitted(false), 5000);
-    setFormData({ name: "", email: "", phone: "", reason: "", message: "" });
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
-    <section id="contacto" className="py-20 bg-gradient-to-b from-background to-muted/30">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
-            Conversemos
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            ¿Tienes preguntas, consultas especiales o quieres saber más? Escríbenos
+    <section id="contacto" className="py-20 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4">Contáctanos</h2>
+          <p className="text-gray-600 text-center mb-12">
+            Estamos aquí para atenderte
           </p>
-          <div className="w-24 h-1 bg-accent mx-auto mt-6" />
-        </div>
 
-        {/* Calendly Banner - Destacado */}
-        <div className="max-w-6xl mx-auto mb-12">
-          <div className="bg-gradient-to-r from-primary via-secondary to-accent p-8 rounded-xl shadow-2xl text-white">
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="p-4 bg-white/20 rounded-full backdrop-blur-sm">
-                  <Video className="h-8 w-8" />
-                </div>
-                <div>
-                  <h3 className="text-2xl font-bold mb-2">¿Prefieres una Videollamada?</h3>
-                  <p className="text-white/90">
-                    Agenda una consulta virtual personalizada con nosotros
+          {/* Banner de Videollamada - Más visible y llamativo */}
+          <div className="mb-12 relative overflow-hidden rounded-2xl shadow-2xl">
+            <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-orange-500"></div>
+            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
+            
+            <div className="relative p-8 md:p-12">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                <div className="flex-1 text-center md:text-left">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mb-4">
+                    <Calendar className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                    ¿Necesitas Asesoría Personalizada?
+                  </h3>
+                  <p className="text-white/90 text-lg mb-2">
+                    Agenda una videollamada con nuestros expertos
+                  </p>
+                  <p className="text-white/80 text-sm">
+                    Te ayudaremos a elegir los mejores productos para tu negocio
                   </p>
                 </div>
-              </div>
-              <Button 
-                size="lg" 
-                className="bg-white text-primary hover:bg-white/90 font-bold px-8 py-6 text-lg shadow-xl"
-                asChild
-              >
-                <a 
-                  href="https://calendly.com/video-socafac/30min" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  Agendar Videollamada
-                </a>
-              </Button>
-            </div>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          {/* Contact Form */}
-          <div className="bg-white p-8 rounded-lg shadow-lg border border-border">
-            <h3 className="text-2xl font-bold font-serif text-primary mb-6">
-              Envíanos un Mensaje
-            </h3>
-
-            {submitted && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
-                ¡Gracias! Tu mensaje ha sido recibido. Te responderemos a la brevedad.
-              </div>
-            )}
-
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <Label htmlFor="name">Nombre Completo *</Label>
-                <Input
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="email">Email *</Label>
-                <Input
-                  id="email"
-                  name="email"
-                  type="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="phone">Teléfono (opcional)</Label>
-                <Input
-                  id="phone"
-                  name="phone"
-                  type="tel"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="reason">Motivo de Contacto *</Label>
-                <select
-                  id="reason"
-                  name="reason"
-                  value={formData.reason}
-                  onChange={handleChange}
-                  required
-                  className="mt-2 w-full px-3 py-2 border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring"
-                >
-                  <option value="">Selecciona una opción</option>
-                  <option value="general">Consulta general</option>
-                  <option value="pedido">Pedido especial/evento</option>
-                  <option value="sugerencias">Sugerencias</option>
-                  <option value="otro">Otro</option>
-                </select>
-              </div>
-
-              <div>
-                <Label htmlFor="message">Mensaje *</Label>
-                <Textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="mt-2"
-                />
-              </div>
-
-              <Button type="submit" size="lg" className="w-full">
-                Enviar Mensaje
-              </Button>
-            </form>
-          </div>
-
-          {/* Contact Information */}
-          <div>
-            <h3 className="text-2xl font-bold font-serif text-primary mb-6">
-              Información de Contacto
-            </h3>
-
-            <div className="space-y-6">
-              {/* Videollamada Card - Destacada */}
-              <div className="flex items-start gap-4 p-6 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-lg shadow-lg border-2 border-primary/20">
-                <div className="p-3 bg-primary rounded-lg">
-                  <Video className="h-6 w-6 text-white" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-bold mb-2 text-lg">Videollamada</h4>
-                  <p className="text-foreground/70 mb-3 text-sm">
-                    Agenda una consulta virtual personalizada
-                  </p>
-                  <Button 
-                    size="sm" 
-                    variant="default"
-                    className="bg-primary hover:bg-primary/90"
-                    asChild
-                  >
-                    <a 
-                      href="https://calendly.com/video-socafac/30min" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                    >
-                      Agendar Ahora
-                    </a>
-                  </Button>
-                </div>
-              </div>
-
-              {/* Email */}
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border border-border">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Email</h4>
+                
+                <div className="flex-shrink-0">
                   <a
-                    href="mailto:info@cecinaslaosorno.cl"
-                    className="text-foreground/70 hover:text-primary transition-colors"
+                    href="https://calendly.com/mauricioibarra-byte/30min"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform"
                   >
-                    info@cecinaslaosorno.cl
+                    <Calendar className="w-6 h-6" />
+                    Agendar Ahora
                   </a>
                 </div>
               </div>
+              
+              {/* Elementos decorativos */}
+              <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-2xl"></div>
+              <div className="absolute bottom-4 left-4 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"></div>
+            </div>
+          </div>
 
-              {/* Phone */}
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border border-border">
-                <div className="p-3 bg-secondary/10 rounded-lg">
-                  <Phone className="h-6 w-6 text-secondary" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Teléfono</h4>
-                  <a
-                    href="tel:+56225271151"
-                    className="text-foreground/70 hover:text-primary transition-colors"
-                  >
-                    (+562) 2527 1151
-                  </a>
-                  <div className="mt-2">
-                    <Button size="sm" variant="default" className="bg-[#25D366] hover:bg-[#20BA5A]" asChild>
-                      <a href="https://wa.me/56225271151" target="_blank" rel="noopener noreferrer">
-                        WhatsApp
-                      </a>
-                    </Button>
-                  </div>
-                </div>
+          {/* Información de Contacto */}
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-4">
+                <Phone className="w-6 h-6 text-red-600" />
               </div>
-
-              {/* Location */}
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border border-border">
-                <div className="p-3 bg-accent/10 rounded-lg">
-                  <MapPin className="h-6 w-6 text-accent" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Dirección</h4>
-                  <p className="text-foreground/70">
-                    Av. El Parrón 0968<br />
-                    La Cisterna, 7980777<br />
-                    Santiago, Región Metropolitana
-                  </p>
-                </div>
-              </div>
-
-              {/* Hours */}
-              <div className="flex items-start gap-4 p-4 bg-white rounded-lg shadow-md border border-border">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <div>
-                  <h4 className="font-bold mb-1">Horarios</h4>
-                  <div className="text-foreground/70 space-y-1">
-                    <p>Lunes a Viernes: 9:00 - 19:00</p>
-                    <p>Sábados: 9:00 - 14:00</p>
-                    <p>Domingos: Cerrado</p>
-                  </div>
-                </div>
-              </div>
+              <h3 className="font-semibold mb-2">Teléfono</h3>
+              <a href="tel:+56912345678" className="text-gray-600 hover:text-red-600 transition-colors">
+                +56 9 1234 5678
+              </a>
             </div>
 
-            {/* Quote */}
-            <div className="mt-8 p-6 bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg border-l-4 border-accent">
-              <blockquote className="text-lg font-serif italic text-primary/80">
-                "Más que clientes, somos familia. Te esperamos con la mejor atención."
-              </blockquote>
+            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-4">
+                <Mail className="w-6 h-6 text-red-600" />
+              </div>
+              <h3 className="font-semibold mb-2">Email</h3>
+              <a href="mailto:contacto@cecinaslasosorno.cl" className="text-gray-600 hover:text-red-600 transition-colors">
+                contacto@cecinaslasosorno.cl
+              </a>
+            </div>
+
+            <div className="text-center p-6 rounded-lg hover:bg-gray-50 transition-colors">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-red-100 rounded-full mb-4">
+                <MapPin className="w-6 h-6 text-red-600" />
+              </div>
+              <h3 className="font-semibold mb-2">Ubicación</h3>
+              <p className="text-gray-600">
+                Osorno, Región de Los Lagos
+              </p>
             </div>
           </div>
         </div>
