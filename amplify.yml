@@ -8,6 +8,13 @@ frontend:
     build:
       commands:
         - pnpm run build
+        - echo "Build completed, checking output directory..."
+        - ls -la out/
+    postBuild:
+      commands:
+        - echo "Preparing static export for deployment..."
+        - echo "Contents of out directory:"
+        - find out -type f | head -20
   artifacts:
     baseDirectory: out
     files:
@@ -16,3 +23,12 @@ frontend:
     paths:
       - node_modules/**/*
       - .next/cache/**/*
+customHeaders:
+  - pattern: '**/*'
+    headers:
+      - key: 'Cache-Control'
+        value: 'public, max-age=31536000, immutable'
+      - key: 'X-Frame-Options'
+        value: 'SAMEORIGIN'
+      - key: 'X-Content-Type-Options'
+        value: 'nosniff'
