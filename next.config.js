@@ -3,14 +3,12 @@ const nextConfig = {
   output: 'export',
   images: {
     unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
   },
   trailingSlash: true,
-};
+  // Ensure all routes are generated at build time
+  generateBuildId: async () => {
+    return 'build-' + Date.now()
+  },
+}
 
-module.exports = nextConfig;
+module.exports = nextConfig
