@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "applications": [
+    {
+      "appRoot": ".",
+      "monorepo": false
+    }
+  ]
+}
