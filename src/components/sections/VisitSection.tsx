@@ -24,10 +24,10 @@ export default function VisitSection() {
               <h3 className="text-xl font-bold text-primary">Ubicación</h3>
             </div>
             <p className="text-foreground/80 mb-4">
-              Av. René Schneider 2355, Osorno, Región de Los Lagos
+              Av. El Parrón 0968, 7980777 Santiago, La Cisterna, Región Metropolitana
             </p>
             <a
-              href="https://maps.google.com/?q=Av.+René+Schneider+2355,+Osorno"
+              href="https://maps.app.goo.gl/BYayGTzX62kQee8eA"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-accent hover:text-accent/80 font-medium transition-colors"
@@ -47,16 +47,20 @@ export default function VisitSection() {
             </div>
             <div className="space-y-2 text-foreground/80">
               <p className="flex justify-between">
-                <span className="font-medium">Lunes - Viernes:</span>
-                <span>9:00 - 19:00</span>
+                <span className="font-medium">Lunes - Jueves:</span>
+                <span>9:00 - 14:00 / 15:00 - 18:00</span>
               </p>
               <p className="flex justify-between">
-                <span className="font-medium">Sábados:</span>
-                <span>9:00 - 14:00</span>
+                <span className="font-medium">Viernes:</span>
+                <span>9:00 - 18:00</span>
+              </p>
+              <p className="flex justify-between">
+                <span className="font-medium">Sabados:</span>
+                <span className="text-muted-foreground">9:00 - 17:00</span>
               </p>
               <p className="flex justify-between">
                 <span className="font-medium">Domingos:</span>
-                <span className="text-muted-foreground">Cerrado</span>
+                <span className="text-muted-foreground">9:00 - 14:00</span>
               </p>
             </div>
           </div>

@@ -36,8 +36,8 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-black mb-4">Tienda</h3>
             <ul className="space-y-3 text-sm text-black/60">
-              <li>Osorno</li>
-              <li>Región de Los Lagos</li>
+              <li>Av. El Parrón #0968, La Cisterna</li>
+              <li>Región Metropolitana</li>
               <li>Chile</li>
             </ul>
           </div>
@@ -46,9 +46,10 @@ export default function Footer() {
           <div>
             <h3 className="text-sm font-semibold text-black mb-4">Horarios</h3>
             <ul className="space-y-3 text-sm text-black/60">
-              <li>Lun - Vie: 9:00 - 19:00</li>
-              <li>Sábados: 9:00 - 14:00</li>
-              <li>Domingos: Cerrado</li>
+              <li>Lun - Jue: 9:00 - 14:00 / 15:00 - 18:00</li>
+              <li>Viernes: 9:00 - 18:00</li>
+              <li>Sabado: 9:00 - 17:00</li>
+              <li>Domingos: 9:00 - 14:00</li>
             </ul>
           </div>
 

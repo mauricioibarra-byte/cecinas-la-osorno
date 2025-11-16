@@ -1,11 +1,22 @@
 'use client';
 
 import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+
+declare global {
+  interface Window {
+    Calendly?: {
+      initInlineWidget: (options: {
+        url: string;
+        parentElement: HTMLElement;
+        prefill?: Record<string, unknown>;
+        utm?: Record<string, unknown>;
+      }) => void;
+    };
+  }
+}
 
 export default function ContactSection() {
-  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
-
   useEffect(() => {
     // Cargar el script de Calendly
     const script = document.createElement('script');
@@ -13,7 +24,14 @@ export default function ContactSection() {
     script.async = true;
     script.onload = () => {
       console.log('Calendly script loaded successfully');
-      setIsCalendlyLoaded(true);
+      // Inicializar el widget cuando el script se carga
+      const calendlyDiv = document.getElementById('calendly-embed');
+      if (calendlyDiv && window.Calendly) {
+        window.Calendly.initInlineWidget({
+          url: 'https://calendly.com/video-socafac/30min',
+          parentElement: calendlyDiv,
+        });
+      }
     };
     script.onerror = () => {
       console.error('Failed to load Calendly script');
@@ -60,21 +78,11 @@ export default function ContactSection() {
             </div>
 
             {/* Calendly Inline Widget */}
-            <div className="bg-white rounded-t-2xl">
-              {isCalendlyLoaded ? (
-                <div
-                  className="calendly-inline-widget"
-                  data-url="https://calendly.com/video-socafac/30min"
-                  style={{ minWidth: '320px', height: '700px' }}
-                />
-              ) : (
-                <div className="flex items-center justify-center h-96">
-                  <div className="text-center">
-                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mb-4"></div>
-                    <p className="text-gray-600">Cargando calendario...</p>
-                  </div>
-                </div>
-              )}
+            <div className="bg-white rounded-t-2xl p-4">
+              <div
+                id="calendly-embed"
+                style={{ minWidth: '320px', height: '700px' }}
+              />
             </div>
           </div>
 
@@ -85,8 +93,8 @@ export default function ContactSection() {
                 <Phone className="w-6 h-6 text-red-600" />
               </div>
               <h3 className="font-semibold mb-2">Teléfono</h3>
-              <a href="tel:+56912345678" className="text-gray-600 hover:text-red-600 transition-colors">
-                +56 9 1234 5678
+              <a href="tel:+56225271151" className="text-gray-600 hover:text-red-600 transition-colors">
+                (+562) 2527 1151
               </a>
             </div>
 
@@ -106,7 +114,8 @@ export default function ContactSection() {
               </div>
               <h3 className="font-semibold mb-2">Ubicación</h3>
               <p className="text-gray-600">
-                Osorno, Región de Los Lagos
+                Av. El Parrón 0968, La Cisterna<br />
+                Región Metropolitana
               </p>
             </div>
           </div>
