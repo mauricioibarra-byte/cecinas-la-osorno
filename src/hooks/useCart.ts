@@ -22,7 +22,7 @@ export function useCart() {
 
         console.log('Initializing cart with session_id:', sessionId)
 
-        // Buscar carrito existente
+        // Buscar carrito existente - usar maybeSingle() para manejar 0 o 1 resultado
         const { data: existingCart, error: fetchError } = await supabase
           .from('app_fd25b764ee_carts')
           .select('*')
