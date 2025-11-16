@@ -5,15 +5,7 @@ export default function HistorySection() {
     <section id="historia" className="py-20 bg-white">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
-            Una Tradición que se Saborea
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            La historia de pasión, familia y calidad que define cada producto
-          </p>
-          <div className="w-24 h-1 bg-accent mx-auto mt-6" />
-        </div>
+        
 
         {/* Story Content */}
         <div className="max-w-4xl mx-auto space-y-16">
@@ -43,28 +35,14 @@ export default function HistorySection() {
             </p>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
               Hemos tomado la posta de esta prestigiosa fábrica con un profundo respeto por su legado.
+              
               Nuestra misión es continuar con la esencia, donde la promesa es mantener la calidad en nuestros procesos y el sabor en nuestros productos, para que así ud. deje que su paladar decida…
+              
+              Conservamos el <strong>alma de la fábrica</strong>, asegurando que cada producto siga siendo artesanal y único
+             
+              Los colaboradores que han dedicado <strong>más de 30 años</strong> a perfeccionar este arte siguen siendo el corazón de nuestra producción
             </p>
-            <ul className="space-y-3 mt-6">
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
-                <span className="text-foreground/80">
-                  Mantenemos intactos los <strong>procesos y recetas</strong> que dan vida a su sabor característico
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
-                <span className="text-foreground/80">
-                  Conservamos el <strong>alma de la fábrica</strong>, asegurando que cada producto siga siendo artesanal y único
-                </span>
-              </li>
-              <li className="flex items-start gap-3">
-                <span className="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0" />
-                <span className="text-foreground/80">
-                  Los colaboradores que han dedicado <strong>más de 30 años</strong> a perfeccionar este arte siguen siendo el corazón de nuestra producción
-                </span>
-              </li>
-            </ul>
+            
           </div>
 
              {/* Commitment */}
