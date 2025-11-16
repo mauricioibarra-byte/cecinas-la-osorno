@@ -1,58 +1,80 @@
 'use client';
 
 import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
+import { useEffect, useState } from 'react';
 
 export default function ContactSection() {
-  const handleCalendlyClick = () => {
-    // Abrir directamente en nueva ventana - más confiable que el popup
-    window.open('https://calendly.com/video-socafac/30min', '_blank', 'width=800,height=800');
-  };
+  const [isCalendlyLoaded, setIsCalendlyLoaded] = useState(false);
+
+  useEffect(() => {
+    // Cargar el script de Calendly
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    script.onload = () => {
+      console.log('Calendly script loaded successfully');
+      setIsCalendlyLoaded(true);
+    };
+    script.onerror = () => {
+      console.error('Failed to load Calendly script');
+    };
+    document.body.appendChild(script);
+
+    // Cargar CSS de Calendly
+    const link = document.createElement('link');
+    link.href = 'https://assets.calendly.com/assets/external/widget.css';
+    link.rel = 'stylesheet';
+    document.head.appendChild(link);
+
+    return () => {
+      if (document.body.contains(script)) {
+        document.body.removeChild(script);
+      }
+      if (document.head.contains(link)) {
+        document.head.removeChild(link);
+      }
+    };
+  }, []);
 
   return (
     <section id="contacto" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl font-bold text-center mb-4">Contáctanos</h2>
           <p className="text-gray-600 text-center mb-12">
             Estamos aquí para atenderte
           </p>
 
-          {/* Banner de Videollamada - Más visible y llamativo */}
-          <div className="mb-12 relative overflow-hidden rounded-2xl shadow-2xl">
-            <div className="absolute inset-0 bg-gradient-to-r from-red-600 via-red-500 to-orange-500"></div>
-            <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4xIj48cGF0aCBkPSJNMzYgMzRjMC0yLjIxLTEuNzktNC00LTRzLTQgMS43OS00IDQgMS43OSA0IDQgNCA0LTEuNzkgNC00em0wLTEwYzAtMi4yMS0xLjc5LTQtNC00cy00IDEuNzktNCA0IDEuNzkgNCA0IDQgNC0xLjc5IDQtNHptMC0xMGMwLTIuMjEtMS43OS00LTQtNHMtNCAxLjc5LTQgNCAxLjc5IDQgNCA0IDQtMS43OSA0LTR6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-20"></div>
-            
-            <div className="relative p-8 md:p-12">
-              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                <div className="flex-1 text-center md:text-left">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mb-4">
-                    <Calendar className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
-                    ¿Necesitas Asesoría Personalizada?
-                  </h3>
-                  <p className="text-white/90 text-lg mb-2">
-                    Agenda una videollamada con nuestros expertos
-                  </p>
-                  <p className="text-white/80 text-sm">
-                    Te ayudaremos a elegir los mejores productos para tu negocio
-                  </p>
-                </div>
-                
-                <div className="flex-shrink-0">
-                  <button
-                    onClick={handleCalendlyClick}
-                    className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform cursor-pointer"
-                  >
-                    <Calendar className="w-6 h-6" />
-                    Agendar Ahora
-                  </button>
-                </div>
+          {/* Banner de Videollamada con Calendly embebido */}
+          <div className="mb-12 bg-gradient-to-r from-red-600 via-red-500 to-orange-500 rounded-2xl shadow-2xl overflow-hidden">
+            <div className="p-8 md:p-12 text-center">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full mb-4">
+                <Calendar className="w-8 h-8 text-white" />
               </div>
-              
-              {/* Elementos decorativos */}
-              <div className="absolute top-4 right-4 w-20 h-20 bg-white/10 rounded-full blur-2xl"></div>
-              <div className="absolute bottom-4 left-4 w-32 h-32 bg-orange-400/20 rounded-full blur-3xl"></div>
+              <h3 className="text-3xl md:text-4xl font-bold text-white mb-3">
+                ¿Necesitas Asesoría Personalizada?
+              </h3>
+              <p className="text-white/90 text-lg mb-6">
+                Agenda una videollamada con nuestros expertos
+              </p>
+            </div>
+
+            {/* Calendly Inline Widget */}
+            <div className="bg-white rounded-t-2xl">
+              {isCalendlyLoaded ? (
+                <div
+                  className="calendly-inline-widget"
+                  data-url="https://calendly.com/video-socafac/30min"
+                  style={{ minWidth: '320px', height: '700px' }}
+                />
+              ) : (
+                <div className="flex items-center justify-center h-96">
+                  <div className="text-center">
+                    <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-red-600 mb-4"></div>
+                    <p className="text-gray-600">Cargando calendario...</p>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
 
