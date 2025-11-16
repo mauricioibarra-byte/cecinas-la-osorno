@@ -14,13 +14,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Plus, Edit, Trash2 } from 'lucide-react'
+import { Plus, Edit, Trash2, Upload, X } from 'lucide-react'
 
 export default function AdminPage() {
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [editingProduct, setEditingProduct] = useState<Product | null>(null)
   const [isDialogOpen, setIsDialogOpen] = useState(false)
+  const [imageFile, setImageFile] = useState<File | null>(null)
+  const [imagePreview, setImagePreview] = useState<string>('')
+  const [uploading, setUploading] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -56,15 +59,72 @@ export default function AdminPage() {
     }
   }
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert('Por favor selecciona un archivo de imagen válido')
+        return
+      }
+
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('La imagen no debe superar los 5MB')
+        return
+      }
+
+      setImageFile(file)
+      
+      // Create preview
+      const reader = new FileReader()
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string)
+      }
+      reader.readAsDataURL(file)
+    }
+  }
+
+  const uploadImage = async (file: File): Promise<string> => {
+    try {
+      const fileExt = file.name.split('.').pop()
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`
+      const filePath = `products/${fileName}`
+
+      const { error: uploadError } = await supabase.storage
+        .from('product-images')
+        .upload(filePath, file)
+
+      if (uploadError) throw uploadError
+
+      const { data } = supabase.storage
+        .from('product-images')
+        .getPublicUrl(filePath)
+
+      return data.publicUrl
+    } catch (error) {
+      console.error('Error uploading image:', error)
+      throw new Error('Error al subir la imagen')
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
 
     try {
+      setUploading(true)
+      let imageUrl = formData.image_url
+
+      // Upload image if a new file is selected
+      if (imageFile) {
+        imageUrl = await uploadImage(imageFile)
+      }
+
       const productData = {
         name: formData.name,
         description: formData.description || null,
         price: parseFloat(formData.price),
-        image_url: formData.image_url || null,
+        image_url: imageUrl || null,
         category: formData.category,
         stock: parseInt(formData.stock)
       }
@@ -103,6 +163,8 @@ export default function AdminPage() {
     } catch (error) {
       console.error('Error saving product:', error)
       alert('Error al guardar el producto. Por favor, verifica los datos e intenta de nuevo.')
+    } finally {
+      setUploading(false)
     }
   }
 
@@ -117,6 +179,7 @@ export default function AdminPage() {
       category: product.category || 'embutidos',
       stock: product.stock.toString()
     })
+    setImagePreview(product.image_url || '')
     setIsDialogOpen(true)
   }
 
@@ -145,6 +208,8 @@ export default function AdminPage() {
 
   const resetForm = () => {
     setEditingProduct(null)
+    setImageFile(null)
+    setImagePreview('')
     setFormData({
       name: '',
       description: '',
@@ -153,6 +218,12 @@ export default function AdminPage() {
       category: 'embutidos',
       stock: ''
     })
+  }
+
+  const removeImage = () => {
+    setImageFile(null)
+    setImagePreview('')
+    setFormData({ ...formData, image_url: '' })
   }
 
   return (
@@ -246,20 +317,68 @@ export default function AdminPage() {
                   </select>
                 </div>
 
-                <div>
-                  <Label htmlFor="image_url">URL de Imagen</Label>
-                  <Input
-                    id="image_url"
-                    type="url"
-                    placeholder="/images/ProductImage.jpg"
-                    value={formData.image_url}
-                    onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                  />
+                <div className="space-y-2">
+                  <Label>Imagen del Producto</Label>
+                  
+                  {/* Image Preview */}
+                  {imagePreview && (
+                    <div className="relative w-full h-48 bg-gray-100 rounded-lg overflow-hidden">
+                      <img
+                        src={imagePreview}
+                        alt="Preview"
+                        className="w-full h-full object-cover"
+                      />
+                      <button
+                        type="button"
+                        onClick={removeImage}
+                        className="absolute top-2 right-2 bg-red-600 text-white p-1 rounded-full hover:bg-red-700"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  )}
+
+                  {/* File Upload Button */}
+                  <div className="flex items-center gap-4">
+                    <Input
+                      id="image"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageChange}
+                      className="hidden"
+                    />
+                    <Label
+                      htmlFor="image"
+                      className="flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-md cursor-pointer transition-colors"
+                    >
+                      <Upload className="w-4 h-4" />
+                      {imageFile ? 'Cambiar imagen' : 'Subir imagen'}
+                    </Label>
+                    {imageFile && (
+                      <span className="text-sm text-gray-600">
+                        {imageFile.name}
+                      </span>
+                    )}
+                  </div>
+
+                  {/* URL Input (optional fallback) */}
+                  <div className="space-y-2">
+                    <Label htmlFor="image_url" className="text-sm text-gray-600">
+                      O ingresa una URL de imagen
+                    </Label>
+                    <Input
+                      id="image_url"
+                      type="url"
+                      placeholder="/images/photo1763259796.jpg"
+                      value={formData.image_url}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                    />
+                  </div>
                 </div>
 
                 <div className="flex gap-2 pt-4">
-                  <Button type="submit" className="flex-1">
-                    {editingProduct ? 'Actualizar' : 'Crear'} Producto
+                  <Button type="submit" className="flex-1" disabled={uploading}>
+                    {uploading ? 'Guardando...' : editingProduct ? 'Actualizar' : 'Crear'} Producto
                   </Button>
                   <Button
                     type="button"
@@ -282,6 +401,9 @@ export default function AdminPage() {
               <thead className="bg-gray-50 border-b">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
+                    Imagen
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
                     Producto
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">
@@ -301,6 +423,19 @@ export default function AdminPage() {
               <tbody className="divide-y">
                 {products.map((product) => (
                   <tr key={product.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4">
+                      {product.image_url ? (
+                        <img
+                          src={product.image_url}
+                          alt={product.name}
+                          className="w-16 h-16 object-cover rounded"
+                        />
+                      ) : (
+                        <div className="w-16 h-16 bg-gray-200 rounded flex items-center justify-center text-gray-400">
+                          Sin imagen
+                        </div>
+                      )}
+                    </td>
                     <td className="px-6 py-4">
                       <div className="font-medium">{product.name}</div>
                       {product.description && (
