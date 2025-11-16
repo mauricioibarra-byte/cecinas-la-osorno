@@ -1,79 +1,102 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useState } from "react";
 import { Menu, X } from "lucide-react";
-import CartButton from "./cart/CartButton";
+import { CartButton } from "@/components/cart/CartButton";
 
 export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navItems = [
-    { href: "#inicio", label: "Inicio" },
-    { href: "#historia", label: "Historia" },
-    { href: "#productos", label: "Productos" },
-    { href: "#visitanos", label: "Visítanos" },
-    { href: "#contacto", label: "Contacto" },
+    { name: "Productos", href: "#productos" },
+    { name: "Historia", href: "#historia" },
+    { name: "Visítanos", href: "#visitanos" },
+    { name: "Contactar", href: "#contacto" },
   ];
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-white shadow-md">
-      <nav className="container mx-auto px-4 py-4">
-        <div className="flex items-center justify-between">
+    <header className="fixed top-0 w-full z-50 bg-white shadow-md">
+      <div className="mx-auto px-6 lg:px-8 max-w-7xl">
+        <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
+          <Link href="/" className="flex items-center space-x-3">
             <img
               src="/images/logo.png"
               alt="Cecinas La Osorno"
               className="h-12 w-auto"
             />
+            <span className="text-xl font-bold text-black hidden sm:block">
+              Cecinas La Osorno
+            </span>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8">
+          <nav className="hidden md:flex items-center space-x-8">
             {navItems.map((item) => (
               <a
-                key={item.href}
+                key={item.name}
                 href={item.href}
-                className="text-gray-700 hover:text-red-600 transition-colors font-medium"
+                className="text-base font-medium text-black/80 hover:text-black transition-colors"
               >
-                {item.label}
+                {item.name}
               </a>
             ))}
+            
+            {/* Cart Button */}
             <CartButton />
-          </div>
+            
+            {/* Admin Link */}
+            <a
+              href="/admin"
+              className="text-base font-medium text-black/60 hover:text-black transition-colors"
+            >
+              Admin
+            </a>
+          </nav>
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
             <CartButton />
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-gray-700 hover:text-red-600 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-black p-2"
               aria-label="Toggle menu"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              {isMobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
 
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 border-t border-gray-200">
-            <div className="flex flex-col gap-4 pt-4">
+        {/* Mobile Menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden py-4 border-t border-black/10">
+            <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <a
-                  key={item.href}
+                  key={item.name}
                   href={item.href}
-                  className="text-gray-700 hover:text-red-600 transition-colors font-medium"
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="text-base font-medium text-black/80 hover:text-black transition-colors"
                 >
-                  {item.label}
+                  {item.name}
                 </a>
               ))}
-            </div>
+              <a
+                href="/admin"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="text-base font-medium text-black/60 hover:text-black transition-colors"
+              >
+                Admin
+              </a>
+            </nav>
           </div>
         )}
-      </nav>
+      </div>
     </header>
   );
 }
