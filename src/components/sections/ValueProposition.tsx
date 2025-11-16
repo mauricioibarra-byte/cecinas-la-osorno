@@ -24,7 +24,7 @@ export default function ValueProposition() {
       <div className="container mx-auto px-4 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold font-sans text-primary mb-4">
             El Sabor de lo Auténtico
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto" />
@@ -44,7 +44,7 @@ export default function ValueProposition() {
                 <div className="mb-6 p-4 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-colors">
                   <pillar.icon className="h-10 w-10 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold font-serif text-foreground mb-4">
+                <h3 className="text-2xl font-bold font-sans text-foreground mb-4">
                   {pillar.title}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed">
@@ -57,7 +57,7 @@ export default function ValueProposition() {
 
         {/* Quote */}
         <div className="mt-16 text-center max-w-3xl mx-auto">
-          <blockquote className="text-2xl font-serif italic text-primary/80 leading-relaxed">
+          <blockquote className="text-2xl font-sans italic text-primary/80 leading-relaxed">
             "El tiempo no se apura cuando se busca la perfección. Cada corte cuenta una historia de dedicación."
           </blockquote>
         </div>

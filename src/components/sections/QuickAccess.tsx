@@ -48,7 +48,7 @@ export default function QuickAccess() {
                 <p className="text-accent text-sm font-medium mb-2">
                   {card.subtitle}
                 </p>
-                <h3 className="text-3xl font-bold font-serif text-white mb-4">
+                <h3 className="text-3xl font-bold font-sans text-white mb-4">
                   {card.title}
                 </h3>
                 <div className="flex items-center text-white group-hover:translate-x-2 transition-transform">

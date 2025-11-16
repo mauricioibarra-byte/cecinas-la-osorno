@@ -11,7 +11,7 @@ export default function HistorySection() {
         <div className="max-w-4xl mx-auto space-y-16">
           {/* Intro */}
           <div className="text-center">
-            <h3 className="text-3xl font-bold font-serif text-primary mb-6">
+            <h3 className="text-3xl font-bold font-sans text-primary mb-6">
               La Tradición Perdura, el Compromiso se Renueva
             </h3>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
@@ -20,14 +20,14 @@ export default function HistorySection() {
               expertas, cada producto lleva consigo el legado de una tradición que ha conquistado el
               paladar de generaciones.
             </p>
-            <p className="text-2xl font-serif italic text-primary/80 mt-8">
+            <p className="text-2xl font-sans italic text-primary/80 mt-8">
               Hoy, esa historia continúa, más fuerte que nunca.
             </p>
           </div>
 
           {/* Legacy Section */}
           <div className="bg-gradient-to-br from-primary/5 to-secondary/5 p-8 md:p-12 rounded-lg border-l-4 border-primary">
-            <h3 className="text-3xl font-bold font-serif text-primary mb-6">
+            <h3 className="text-3xl font-bold font-sans text-primary mb-6">
               El Legado que Nos Define
             </h3>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
@@ -47,10 +47,10 @@ export default function HistorySection() {
 
              {/* Commitment */}
           <div className="text-center bg-primary/5 p-8 md:p-12 rounded-lg">
-            <h3 className="text-3xl font-bold font-serif text-primary mb-6">
+            <h3 className="text-3xl font-bold font-sans text-primary mb-6">
               Nuestro Compromiso
             </h3>
-            <p className="text-xl font-serif italic text-primary/80 mb-6">
+            <p className="text-xl font-sans italic text-primary/80 mb-6">
               La Calidad de Siempre con una Visión de Futuro
             </p>
             <p className="text-lg text-foreground/80 leading-relaxed mb-4">
@@ -65,10 +65,10 @@ export default function HistorySection() {
 
           {/* Final Statement */}
           <div className="text-center py-12">
-            <h3 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
+            <h3 className="text-4xl md:text-5xl font-bold font-sans text-primary mb-4">
               SOCAFAC, SOMOS CECINAS LA OSORNO
             </h3>
-            <p className="text-2xl font-serif italic text-accent">
+            <p className="text-2xl font-sans italic text-accent">
               Una tradición que sigue viva
             </p>
             <Button size="lg" className="mt-8" asChild>
