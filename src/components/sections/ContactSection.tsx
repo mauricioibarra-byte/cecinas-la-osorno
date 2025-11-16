@@ -1,56 +1,11 @@
 'use client';
 
 import { Calendar, Phone, Mail, MapPin } from 'lucide-react';
-import { useEffect } from 'react';
-
-interface CalendlyWindow extends Window {
-  Calendly?: {
-    initPopupWidget: (options: { url: string }) => void;
-  };
-}
 
 export default function ContactSection() {
-  useEffect(() => {
-    // Cargar el script de Calendly
-    const script = document.createElement('script');
-    script.src = 'https://assets.calendly.com/assets/external/widget.js';
-    script.async = true;
-    script.onload = () => {
-      console.log('Calendly script loaded successfully');
-    };
-    script.onerror = () => {
-      console.error('Failed to load Calendly script');
-    };
-    document.body.appendChild(script);
-
-    return () => {
-      if (document.body.contains(script)) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
-  const handleCalendlyClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    
-    // Verificar si Calendly está disponible
-    const calendlyWindow = window as CalendlyWindow;
-    if (typeof window !== 'undefined' && calendlyWindow.Calendly) {
-      try {
-        calendlyWindow.Calendly.initPopupWidget({
-          url: 'https://calendly.com/video-socafac/30min'
-        });
-        console.log('Calendly popup opened');
-      } catch (error) {
-        console.error('Error opening Calendly popup:', error);
-        // Fallback: abrir en nueva ventana
-        window.open('https://calendly.com/video-socafac/30min', '_blank');
-      }
-    } else {
-      console.warn('Calendly not loaded, opening in new window');
-      // Fallback: abrir en nueva ventana si el script no se cargó
-      window.open('https://calendly.com/video-socafac/30min', '_blank');
-    }
+  const handleCalendlyClick = () => {
+    // Abrir directamente en nueva ventana - más confiable que el popup
+    window.open('https://calendly.com/video-socafac/30min', '_blank', 'width=800,height=800');
   };
 
   return (
@@ -85,14 +40,13 @@ export default function ContactSection() {
                 </div>
                 
                 <div className="flex-shrink-0">
-                  <a
-                    href="https://calendly.com/video-socafac/30min"
+                  <button
                     onClick={handleCalendlyClick}
                     className="inline-flex items-center gap-3 px-8 py-4 bg-white text-red-600 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 shadow-xl hover:shadow-2xl hover:scale-105 transform cursor-pointer"
                   >
                     <Calendar className="w-6 h-6" />
                     Agendar Ahora
-                  </a>
+                  </button>
                 </div>
               </div>
               

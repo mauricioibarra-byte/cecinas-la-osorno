@@ -3,36 +3,14 @@ import { MapPin, Clock, Phone, CheckCircle2, Navigation } from "lucide-react";
 
 const services = [
   "Asesoría personalizada",
-  "Degustación de productos",
-  "Cortes al momento",
+  "Venta mayorista",
+  "Carniceria",
   "Pedidos especiales para eventos",
-  "Envíos locales (delivery)",
 ];
 
 export default function VisitSection() {
   return (
     <section id="visitanos" className="py-20 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold font-serif text-primary mb-4">
-            Más que una Compra, una Experiencia
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Visítanos y descubre por qué nuestros clientes vuelven generación tras generación
-          </p>
-          <div className="w-24 h-1 bg-accent mx-auto mt-6" />
-        </div>
-
-        {/* Invitation */}
-        <div className="max-w-4xl mx-auto text-center mb-16">
-          <p className="text-lg text-foreground/80 leading-relaxed">
-            En Cecinas La Osorno, cada visita es un viaje sensorial. El aroma de las especias,
-            la calidez de nuestro equipo, el asesoramiento experto y, por supuesto, la posibilidad
-            de <strong>degustar antes de llevar</strong>. Te esperamos para compartir nuestra pasión.
-          </p>
-        </div>
-
         {/* Info Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {/* Location */}

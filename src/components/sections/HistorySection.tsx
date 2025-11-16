@@ -67,31 +67,7 @@ export default function HistorySection() {
             </ul>
           </div>
 
-          {/* Expert Hands */}
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            <div>
-              <h3 className="text-3xl font-bold font-serif text-primary mb-6">
-                Manos Expertas, Sabor Garantizado
-              </h3>
-              <p className="text-lg text-foreground/80 leading-relaxed mb-4">
-                Son ellos, nuestros maestros artesanos, quienes guardan el secreto del sabor y
-                garantizan la calidad de siempre. Su experiencia de más de tres décadas es el tesoro
-                más valioso de Cecinas La Osorno.
-              </p>
-              <blockquote className="border-l-4 border-accent pl-4 italic text-lg text-primary/80 mt-6">
-                "Cada cecina lleva consigo años de conocimiento y dedicación"
-              </blockquote>
-            </div>
-            <div className="relative h-80 rounded-lg overflow-hidden shadow-xl">
-              <img
-                src="https://cosascaseras.com/wp-content/uploads/sites/2/2017/03/244-como-hacer-chorizo-casero-2-1.jpg"
-                alt="Proceso artesanal de elaboración"
-                className="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-
-          {/* Commitment */}
+             {/* Commitment */}
           <div className="text-center bg-primary/5 p-8 md:p-12 rounded-lg">
             <h3 className="text-3xl font-bold font-serif text-primary mb-6">
               Nuestro Compromiso
