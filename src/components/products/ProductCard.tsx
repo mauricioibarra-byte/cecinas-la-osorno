@@ -40,7 +40,7 @@ export function ProductCard({ product }: ProductCardProps) {
       <div className="p-4">
         <h3 className="font-bold text-lg mb-2">{product.name}</h3>
         {product.description && (
-          <p className="text-sm text-muted-foreground mb-3 line-clamp-2">
+          <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
             {product.description}
           </p>
         )}
