@@ -42,17 +42,18 @@ export default function Header() {
                 {item.name}
               </a>
             ))}
-            
+
             {/* Cart Button */}
             <CartButton />
-            
-            {/* Admin Link */}
+
+            {/* Admin Link - Hidden
             <a
               href="/admin"
               className="text-base font-medium text-black/60 hover:text-black transition-colors"
             >
               Admin
             </a>
+            */}
           </nav>
 
           {/* Mobile Menu Button */}
@@ -86,6 +87,7 @@ export default function Header() {
                   {item.name}
                 </a>
               ))}
+              {/* 
               <a
                 href="/admin"
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -93,6 +95,7 @@ export default function Header() {
               >
                 Admin
               </a>
+              */}
             </nav>
           </div>
         )}

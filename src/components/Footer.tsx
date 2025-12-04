@@ -58,13 +58,13 @@ export default function Footer() {
             <h3 className="text-sm font-semibold text-black mb-4">Contacto</h3>
             <ul className="space-y-3 text-sm">
               <li>
-                <a href="tel:+56912345678" className="text-black/60 hover:text-black transition-colors">
-                  +56 9 1234 5678
+                <a href="tel:+56225271151" className="text-black/60 hover:text-black transition-colors">
+                  +56 2 2527 1151
                 </a>
               </li>
               <li>
-                <a href="mailto:info@cecinaslaosorno.cl" className="text-black/60 hover:text-black transition-colors">
-                  info@cecinaslaosorno.cl
+                <a href="mailto:contacto@cecinaslaosorno.cl" className="text-black/60 hover:text-black transition-colors">
+                  contacto@cecinaslaosorno.cl
                 </a>
               </li>
             </ul>

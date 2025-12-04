@@ -44,7 +44,8 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.description}
           </p>
         )}
-        <div className="flex items-center justify-between">
+        {/* Price and Add to Cart - Hidden
+        <div className="hidden">
           <span className="text-2xl font-bold text-red-600">
             ${product.price.toLocaleString('es-CL')}
           </span>
@@ -57,11 +58,15 @@ export function ProductCard({ product }: ProductCardProps) {
             {product.stock <= 0 ? 'Agotado' : 'Agregar'}
           </Button>
         </div>
-        {product.stock > 0 && product.stock < 10 && (
-          <p className="text-xs text-orange-600 mt-2">
-            ¡Solo quedan {product.stock} unidades!
-          </p>
-        )}
+        */}
+        {/* Temporarily hidden: stock warning */}
+        <div className="hidden">
+          {product.stock > 0 && product.stock < 10 && (
+            <p className="text-xs text-orange-600 mt-2">
+              ¡Solo quedan {product.stock} unidades!
+            </p>
+          )}
+        </div>
       </div>
     </div>
   )

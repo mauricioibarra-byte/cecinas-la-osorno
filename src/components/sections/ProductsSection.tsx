@@ -20,7 +20,7 @@ export default function ProductsSection() {
     try {
       setLoading(true);
       setError(null);
-      
+
       const { data, error: fetchError } = await supabase
         .from('app_fd25b764ee_products')
         .select('*')
@@ -31,12 +31,12 @@ export default function ProductsSection() {
         setError('Error al cargar los productos. Por favor, recarga la página.');
         return;
       }
-      
+
       if (!data || data.length === 0) {
         setError('No hay productos disponibles en este momento.');
         return;
       }
-      
+
       setProducts(data);
     } catch (err) {
       console.error('Unexpected error:', err);
@@ -50,7 +50,7 @@ export default function ProductsSection() {
     try {
       await addToCart(product, 1);
       setAddedProducts(prev => new Set(prev).add(product.id));
-      
+
       // Remover el check después de 2 segundos
       setTimeout(() => {
         setAddedProducts(prev => {
@@ -129,14 +129,14 @@ export default function ProductsSection() {
                           Sin imagen
                         </div>
                       )}
-                      
+
                       {/* Badge de stock bajo */}
                       {product.stock > 0 && product.stock < 10 && (
                         <div className="absolute top-4 right-4 bg-orange-500 text-white px-3 py-1 rounded-full text-sm font-medium">
                           ¡Solo {product.stock}!
                         </div>
                       )}
-                      
+
                       {/* Badge de agotado */}
                       {product.stock <= 0 && (
                         <div className="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-medium">
@@ -155,8 +155,8 @@ export default function ProductsSection() {
                           {product.description}
                         </p>
                       )}
-                      
-                      {/* Precio y botón */}
+
+                      {/* Price and Add to Cart - Hidden
                       <div className="flex items-center justify-between mt-4">
                         <span className="text-3xl font-bold text-red-600">
                           ${product.price.toLocaleString('es-CL')}
@@ -188,6 +188,7 @@ export default function ProductsSection() {
                           )}
                         </button>
                       </div>
+                      */}
                     </div>
                   </div>
                 </div>
