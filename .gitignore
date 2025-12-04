@@ -37,3 +37,11 @@ next-env.d.ts
 # IDE
 .vscode
 .idea
+
+# Lock files (keep only one)
+pnpm-lock.yaml
+bun.lock
+
+# Config directories
+.mgx
+.same
